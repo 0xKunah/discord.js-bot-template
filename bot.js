@@ -1,16 +1,18 @@
 let { Bot } = require('./structures/Client')
 let { Intents, Permissions } = require('discord.js')
 let client = new Bot({intents : [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]})
+module.exports.client = client
 let { Commands } = require('./structures/Handler')
+const { Event } = require('./structures/Event')
 const { token, prefix } = require('./config.json')
 const { red } = require('colors')
 const { Error_Embed } = require('./utils/Embed')
-Commands("./commands/", client)
+Commands("./commands/")
 
 client.login(token)
 client.whenReady('The bot is ready !')
 client.setActivity("by Kunah#0763", "WATCHING")
-client.on('messageCreate', msg => {
+new Event("messageCreate", (msg) => {
     if(msg.content.startsWith(prefix)){
         if(!msg.guild.me.permissions.has(Permissions.FLAGS.SEND_MESSAGES)) return console.log(red('❌ The bot cant send messages'))
         let command = client.commands.get(msg.content.split(' ')[0].substr(prefix.length))

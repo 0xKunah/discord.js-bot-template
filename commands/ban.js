@@ -1,6 +1,7 @@
 const { Embed, Error_Embed } = require('../utils/Embed')
 const { Permissions } = require('discord.js')
-module.exports.exc = (msg, args, client) => {
+const { Command } = require('../structures/Command')
+module.exports = new Command("ban", (msg, args) => {
     if(msg.member.permissions.has(Permissions.FLAGS.BAN_MEMBERS)){
         if(msg.guild.me.permissions.has(Permissions.FLAGS.BAN_MEMBERS)){
             let target = msg.mentions.members.first()
@@ -14,4 +15,4 @@ module.exports.exc = (msg, args, client) => {
             })
         } else msg.channel.send({embeds : [Error_Embed(msg.author, "I can't ban members")]})
     } else msg.channel.send({embeds : [Error_Embed(msg.author, "You can't ban members")]})
-}
+})
