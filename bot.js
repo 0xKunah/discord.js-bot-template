@@ -4,14 +4,14 @@ let client = new Bot({intents : [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSA
 module.exports.client = client
 let { Commands } = require('./structures/Handler')
 const { Event } = require('./structures/Event')
-const { token, prefix } = require('./config.json')
+const { token, prefix, status, status_type } = require('./config.json')
 const { red } = require('colors')
 const { Error_Embed } = require('./utils/Embed')
 Commands("./commands/")
 
 client.login(token)
 client.whenReady('The bot is ready !')
-client.setActivity("by Kunah#0763", "WATCHING")
+client.setActivity({name : status, type : status_type})
 new Event("messageCreate", (msg) => {
     if(msg.content.startsWith(prefix)){
         if(!msg.guild.me.permissions.has(Permissions.FLAGS.SEND_MESSAGES)) return console.log(red('❌ The bot cant send messages'))

@@ -1,6 +1,6 @@
 const { MessageEmbed } = require("discord.js")
 
-module.exports.Embed = class {
+class Embed {
     constructor(author, title, desc, fields, color, footer) {
         return new MessageEmbed()
             .setAuthor(author.username, author.avatarURL())
@@ -12,10 +12,11 @@ module.exports.Embed = class {
             .setTimestamp()
     }
 }
+module.exports.Embed = Embed
 
 module.exports.Error_Embed = class {
     constructor(author, title, desc='')  {
-        return this.Embed(author, `:x: ${title}`, desc, [], "RED", "")
+        return new Embed(author, `:x: ${title}`, desc, [], "RED", "")
     }
 }
 

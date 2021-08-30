@@ -1,4 +1,6 @@
 {
     "token" : "your_token_here",
-    "prefix" : "$"
+    "prefix" : "$",
+    "status" : "By Kunah #0763",
+    "status_type" : "WATCHING"
 }

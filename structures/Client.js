@@ -7,11 +7,11 @@ module.exports.Bot = class extends Client {
         this.commands = new Collection()
     }
 
-    setActivity(name, type){
+    setActivity(status){
         this.on("ready", () => {
             this.user.setPresence({ 
                 activities: [
-                    { name, type }
+                    status
                 ]
             })
         })

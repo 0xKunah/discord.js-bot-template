@@ -1,6 +1,6 @@
 {
   "name": "template-bot",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "a discord.js v13 bot template",
   "main": "bot.js",
   "dependencies": {
