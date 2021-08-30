@@ -21,7 +21,7 @@ new Event("messageCreate", (msg) => {
             let args = msg.content.substr(msg.content.split(' ')[0].length+1).split(" ")
             command.exc(msg, args, client)
         } else return msg.channel.send({ embeds : [
-            Error_Embed(msg.author, `Command "${msg.content.split(' ')[0].substr(prefix.length)}" not found`, "This command was not found, verify your message and retry.")
+            new Error_Embed(msg.author, `Command "${msg.content.split(' ')[0].substr(prefix.length)}" not found`, "This command was not found, verify your message and retry.")
         ]})
     }
 })
