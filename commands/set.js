@@ -1,12 +1,11 @@
 const { Error_Embed, Embed } = require('../utils/Embed')
 const { Command } = require('../structures/Command')
 const { Permissions } = require('discord.js')
+const { prefix } = require('../config.json')
 const fs = require('fs')
-module.exports = new Command("set", (msg, args) => {
+
+module.exports = new Command("set", {command : `\`\`${prefix}set <prefix | status | status_type> (required) <text> (required)\`\``, desc : "Change the prefix/status/status type to what do you want"}, "MANAGE_GUILD", (msg, args) => {
     let supportedSets = ["prefix", "status", "status_type"]
-    if(!msg.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD)) return msg.channel.send({ embeds : [
-        new Error_Embed(msg.author, "Access denied", "You havent the ``MANAGE_GUILD`` permission flag, which is required to execute this command")
-    ]})
     if(!args[0]) return msg.channel.send({ embeds : [new Error_Embed(msg.author, `Too few args given`, "Provide more args to run this command")]}) 
     if(supportedSets.includes(args[0])){
         let set = args.splice(0, 1).join(' ');

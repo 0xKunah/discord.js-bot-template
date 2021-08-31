@@ -19,7 +19,12 @@ new Event("messageCreate", (msg) => {
         msg.delete()
         if(command){
             let args = msg.content.substr(msg.content.split(' ')[0].length+1).split(" ")
-            command.exc(msg, args, client)
+            if(!command.permissions || msg.member.permissions.has(Permissions.FLAGS[command.permissions])){
+                if(!command.permissions || msg.guild.me.permissions.has(Permissions.FLAGS[command.permissions])){
+                    command.exc(msg, args, client)
+                } else return msg.channel.send({ embeds : [new Error_Embed(msg.author, `You're not allowed to execute "${msg.content.split(' ')[0].substr(prefix.length)}" command`, `This command requires the \`\`${command.permissions}\`\` permission flag, and you have not it, ask someone who has it to run this command`)]})
+            } else return msg.channel.send({ embeds : [new Error_Embed(msg.author, `I'm not allowed to execute "${msg.content.split(' ')[0].substr(prefix.length)}" command`, `This command requires the \`\`${command.permissions}\`\` permission flag, and i have not it, ask someone who can give it to me to run this command`)]})
+            
         } else return msg.channel.send({ embeds : [
             new Error_Embed(msg.author, `Command "${msg.content.split(' ')[0].substr(prefix.length)}" not found`, "This command was not found, verify your message and retry.")
         ]})
